@@ -43,7 +43,7 @@ const AnimatedReactions: React.FC = () => {
             }}
             exit={{ opacity: 0, scale: 0.5 }}
             transition={{ duration: 1 }}
-            className="absolute text-4xl"
+            className="absolute text-4xl pointer-events-none select-none"
             onAnimationComplete={() => {
               setReactions((prev) => prev.filter((r) => r.id !== reaction.id));
             }}

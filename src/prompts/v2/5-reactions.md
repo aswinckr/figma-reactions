@@ -13,3 +13,9 @@ Use framer motion for the animation
 // ADDED LATER:
 
 I don't see animatedReactions work
+
+---
+
+When the emoji instance is created the cursor becomes a text cursor
+
+keep the same pointer cursor and do not highlight the emoji text
