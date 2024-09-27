@@ -34,11 +34,11 @@ const ReactionWheel: React.FC = () => {
           ></div>
         ))}
 
-        {/* Section highlights remain unchanged */}
+        {/* Update section highlights to use a lighter purple color */}
         {reactions.map((_, index) => (
           <motion.div
             key={`highlight-${index}`}
-            className="absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left bg-gray-100"
+            className="absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left bg-purple-100 cursor-pointer"
             style={{
               transform: `rotate(${
                 (index * 360) / reactions.length + MANUAL_ROTATION_ADJUSTMENT
@@ -46,8 +46,8 @@ const ReactionWheel: React.FC = () => {
               clipPath: "polygon(0 0, 100% 0, 0 100%)",
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
           ></motion.div>
         ))}
       </div>
@@ -57,7 +57,7 @@ const ReactionWheel: React.FC = () => {
         return (
           <div
             key={index}
-            className="absolute w-10 h-10 rounded-full flex items-center justify-center"
+            className="absolute w-10 h-10 rounded-full flex items-center justify-center pointer-events-none"
             style={{
               top: `${50 + 40 * Math.sin(angle)}%`,
               left: `${50 + 40 * Math.cos(angle)}%`,
@@ -69,20 +69,12 @@ const ReactionWheel: React.FC = () => {
         );
       })}
 
-      {/* Update the center circle to use Framer Motion */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center z-20"
-        whileHover={{ scale: 1.1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        <motion.div
-          className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center"
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        >
+      {/* Update the center circle to remain constant */}
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <div className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center pointer-events-auto">
           <span className="text-2xl">😊</span>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   );
 };
