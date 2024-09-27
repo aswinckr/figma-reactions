@@ -13,30 +13,30 @@ const ReactionWheel: React.FC = () => {
 
   return (
     <div className="relative w-64 h-64">
-      <div className="absolute inset-0 rounded-full border-4 border-purple-500 bg-white"></div>
+      <div className="absolute inset-0 rounded-full border-4 border-purple-500 bg-white overflow-hidden">
+        {/* Add separations */}
+        {reactions.map((_, index) => (
+          <div
+            key={`separation-${index}`}
+            className="absolute top-1/2 left-1/2 w-1/2 h-0.5 bg-gray-200 origin-left"
+            style={{
+              transform: `rotate(${(index * 360) / reactions.length}deg)`,
+            }}
+          ></div>
+        ))}
 
-      {/* Add separations */}
-      {reactions.map((_, index) => (
-        <div
-          key={`separation-${index}`}
-          className="absolute top-1/2 left-1/2 w-1/2 h-0.5 bg-gray-200 origin-left"
-          style={{
-            transform: `rotate(${(index * 360) / reactions.length}deg)`,
-          }}
-        ></div>
-      ))}
-
-      {/* Add section highlights */}
-      {reactions.map((_, index) => (
-        <div
-          key={`highlight-${index}`}
-          className="absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left bg-gray-100"
-          style={{
-            transform: `rotate(${(index * 360) / reactions.length}deg)`,
-            clipPath: "polygon(0 0, 100% 0, 0 100%)",
-          }}
-        ></div>
-      ))}
+        {/* Add section highlights */}
+        {reactions.map((_, index) => (
+          <div
+            key={`highlight-${index}`}
+            className="absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left bg-gray-100"
+            style={{
+              transform: `rotate(${(index * 360) / reactions.length}deg)`,
+              clipPath: "polygon(0 0, 100% 0, 0 100%)",
+            }}
+          ></div>
+        ))}
+      </div>
 
       {reactions.map((reaction, index) => (
         <div
