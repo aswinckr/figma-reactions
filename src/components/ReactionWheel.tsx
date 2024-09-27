@@ -69,12 +69,20 @@ const ReactionWheel: React.FC = () => {
         );
       })}
 
-      {/* Move the center circle to be above the separations and highlights */}
-      <div className="absolute inset-0 flex items-center justify-center z-20">
-        <div className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center">
+      {/* Update the center circle to use Framer Motion */}
+      <motion.div
+        className="absolute inset-0 flex items-center justify-center z-20"
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <motion.div
+          className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
           <span className="text-2xl">😊</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
