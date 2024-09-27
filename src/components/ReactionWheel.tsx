@@ -26,6 +26,18 @@ const ReactionWheel: React.FC = () => {
         ></div>
       ))}
 
+      {/* Add section highlights */}
+      {reactions.map((_, index) => (
+        <div
+          key={`highlight-${index}`}
+          className="absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left bg-gray-100"
+          style={{
+            transform: `rotate(${(index * 360) / reactions.length}deg)`,
+            clipPath: "polygon(0 0, 100% 0, 0 100%)",
+          }}
+        ></div>
+      ))}
+
       {reactions.map((reaction, index) => (
         <div
           key={index}
@@ -46,8 +58,8 @@ const ReactionWheel: React.FC = () => {
         </div>
       ))}
 
-      {/* Move the center circle to be above the separations */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
+      {/* Move the center circle to be above the separations and highlights */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center">
           <span className="text-2xl">😊</span>
         </div>
