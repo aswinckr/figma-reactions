@@ -14,11 +14,18 @@ const ReactionWheel: React.FC = () => {
   return (
     <div className="relative w-64 h-64">
       <div className="absolute inset-0 rounded-full border-4 border-purple-500 bg-white"></div>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center">
-          <span className="text-2xl">😊</span>
-        </div>
-      </div>
+
+      {/* Add separations */}
+      {reactions.map((_, index) => (
+        <div
+          key={`separation-${index}`}
+          className="absolute top-1/2 left-1/2 w-1/2 h-0.5 bg-gray-200 origin-left"
+          style={{
+            transform: `rotate(${(index * 360) / reactions.length}deg)`,
+          }}
+        ></div>
+      ))}
+
       {reactions.map((reaction, index) => (
         <div
           key={index}
@@ -36,6 +43,13 @@ const ReactionWheel: React.FC = () => {
           <span className="text-xl">{reaction.emoji}</span>
         </div>
       ))}
+
+      {/* Move the center circle to be above the separations */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <div className="w-24 h-24 bg-purple-200 rounded-full flex items-center justify-center">
+          <span className="text-2xl">😊</span>
+        </div>
+      </div>
     </div>
   );
 };
