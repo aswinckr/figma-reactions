@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Reaction {
@@ -11,18 +11,26 @@ interface Reaction {
 
 const AnimatedReactions: React.FC = () => {
   const [reactions, setReactions] = useState<Reaction[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const newReaction: Reaction = {
-      id: Date.now(),
-      x: event.clientX,
-      y: event.clientY,
-    };
-    setReactions((prev) => [...prev, newReaction]);
+    // Check if the click is on the container itself
+    if (event.target === containerRef.current) {
+      const newReaction: Reaction = {
+        id: Date.now(),
+        x: event.clientX,
+        y: event.clientY,
+      };
+      setReactions((prev) => [...prev, newReaction]);
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-50" onClick={handleClick}>
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-50"
+      onClick={handleClick}
+    >
       <AnimatePresence>
         {reactions.map((reaction) => (
           <motion.div
