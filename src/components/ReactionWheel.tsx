@@ -32,10 +32,12 @@ const ReactionWheel: React.FC = () => {
           className="absolute w-10 h-10 rounded-full flex items-center justify-center"
           style={{
             top: `${
-              50 + 40 * Math.sin((index * 2 * Math.PI) / reactions.length)
+              50 +
+              40 * Math.sin(((index + 0.5) * 2 * Math.PI) / reactions.length)
             }%`,
             left: `${
-              50 + 40 * Math.cos((index * 2 * Math.PI) / reactions.length)
+              50 +
+              40 * Math.cos(((index + 0.5) * 2 * Math.PI) / reactions.length)
             }%`,
             transform: "translate(-50%, -50%)",
           }}
