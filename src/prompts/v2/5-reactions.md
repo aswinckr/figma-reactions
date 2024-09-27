@@ -19,3 +19,9 @@ I don't see animatedReactions work
 When the emoji instance is created the cursor becomes a text cursor
 
 keep the same pointer cursor and do not highlight the emoji text
+
+I want the layers under this div which triggers the emoji selectable. It should essentally be a transparent layer
+
+I still can't select the text inside @page.tsx
+
+now the layers are selectable but the emoji is not triggered
