@@ -5,6 +5,9 @@ import React, { useState } from "react";
 const PieShape: React.FC = () => {
   const [hoveredSection, setHoveredSection] = useState<number | null>(null);
 
+  // Array of emojis to use for each section
+  const emojis = ["😀", "🎉", "🚀", "💡", "🌈", "🎵", "🍕", "🌟"];
+
   return (
     <svg width="300" height="300" viewBox="0 0 300 300">
       <circle
@@ -36,6 +39,15 @@ const PieShape: React.FC = () => {
             onMouseLeave={() => setHoveredSection(null)}
             style={{ cursor: "pointer" }}
           />
+          <text
+            x={150 + 100 * Math.cos((Math.PI / 4) * index + Math.PI / 8)}
+            y={150 + 100 * Math.sin((Math.PI / 4) * index + Math.PI / 8)}
+            fontSize="24"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            {emojis[index]}
+          </text>
         </React.Fragment>
       ))}
     </svg>
