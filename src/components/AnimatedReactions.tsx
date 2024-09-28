@@ -9,7 +9,13 @@ interface Reaction {
   y: number;
 }
 
-const AnimatedReactions: React.FC = () => {
+interface AnimatedReactionsProps {
+  currentEmoji: string;
+}
+
+const AnimatedReactions: React.FC<AnimatedReactionsProps> = ({
+  currentEmoji,
+}) => {
   const [reactions, setReactions] = useState<Reaction[]>([]);
 
   const handleClick = useCallback((event: MouseEvent) => {
@@ -47,7 +53,7 @@ const AnimatedReactions: React.FC = () => {
               setReactions((prev) => prev.filter((r) => r.id !== reaction.id));
             }}
           >
-            🔥
+            {currentEmoji}
           </motion.div>
         ))}
       </AnimatePresence>

@@ -5,11 +5,12 @@ import React, { useState, forwardRef, ForwardedRef } from "react";
 interface PieShapeProps {
   isVisible: boolean;
   triggerPosition: { x: number; y: number };
+  onEmojiSelect: (emoji: string) => void; // Add this line
 }
 
 const PieShape = forwardRef(
   (
-    { isVisible, triggerPosition }: PieShapeProps,
+    { isVisible, triggerPosition, onEmojiSelect }: PieShapeProps, // Add onEmojiSelect here
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [hoveredSection, setHoveredSection] = useState<number | null>(null);
@@ -69,6 +70,7 @@ const PieShape = forwardRef(
                 fill={hoveredSection === index ? "lavender" : "transparent"}
                 onMouseEnter={() => setHoveredSection(index)}
                 onMouseLeave={() => setHoveredSection(null)}
+                onClick={() => onEmojiSelect(emojis[index])} // Add this line
                 style={{ cursor: "pointer" }}
               />
               <text

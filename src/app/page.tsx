@@ -9,6 +9,7 @@ export default function Home() {
   const [triggerPosition, setTriggerPosition] = useState({ x: 0, y: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const pieShapeRef = useRef<HTMLDivElement>(null);
+  const [selectedEmoji, setSelectedEmoji] = useState("🔥"); // Add this line
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -43,6 +44,11 @@ export default function Home() {
     };
   }, [isVisible, mousePosition]);
 
+  const handleEmojiSelect = (emoji: string) => {
+    setSelectedEmoji(emoji);
+    setIsVisible(false);
+  };
+
   return (
     <div className="relative min-h-screen">
       <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -52,13 +58,15 @@ export default function Home() {
             ref={pieShapeRef}
             isVisible={isVisible}
             triggerPosition={triggerPosition}
+            onEmojiSelect={handleEmojiSelect} // Add this line
           />
         </div>
         <p className="text-sm text-gray-500 relative z-10">
           Press 'E' to show reactions, click outside to hide
         </p>
       </div>
-      <AnimatedReactions />
+      <AnimatedReactions currentEmoji={selectedEmoji} />{" "}
+      {/* Update this line */}
     </div>
   );
 }
