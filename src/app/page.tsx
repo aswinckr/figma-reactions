@@ -1,14 +1,61 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import PieShape from "../components/PieShape";
 import AnimatedReactions from "../components/AnimatedReactions";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [triggerPosition, setTriggerPosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const pieShapeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === "e" && !isVisible) {
+        setIsVisible(true);
+        setTriggerPosition(mousePosition);
+      }
+    };
+
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isVisible &&
+        pieShapeRef.current &&
+        !pieShapeRef.current.contains(event.target as Node)
+      ) {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isVisible, mousePosition]);
+
   return (
     <div className="relative min-h-screen">
       <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <h1 className="text-2xl font-bold">Figma Reactions</h1>
-        <div className="relative z-10">{/* <PieShape /> */}</div>
+        <div className="relative z-10">
+          <PieShape
+            ref={pieShapeRef}
+            isVisible={isVisible}
+            triggerPosition={triggerPosition}
+          />
+        </div>
         <p className="text-sm text-gray-500 relative z-10">
-          Click anywhere on the screen to see reactions
+          Press 'E' to show reactions, click outside to hide
         </p>
       </div>
       <AnimatedReactions />
