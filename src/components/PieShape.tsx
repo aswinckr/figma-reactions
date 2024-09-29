@@ -82,7 +82,7 @@ const PieShape = forwardRef(
                 fill={hoveredSection === index ? "lavender" : "transparent"}
                 onMouseEnter={() => setHoveredSection(index)}
                 onMouseLeave={() => setHoveredSection(null)}
-                onClick={() => onEmojiSelect(emojis[index])} // Add this line
+                onClick={() => onEmojiSelect(emojis[index])}
                 style={{ cursor: "pointer" }}
               />
               <text
@@ -95,6 +95,7 @@ const PieShape = forwardRef(
                 fontSize="24"
                 textAnchor="middle"
                 dominantBaseline="central"
+                pointerEvents="none"
               >
                 {emojis[index]}
               </text>
