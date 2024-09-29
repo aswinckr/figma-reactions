@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, forwardRef, ForwardedRef } from "react";
+import { FiShuffle } from "react-icons/fi"; // Import the shuffle icon
 
 interface PieShapeProps {
   isVisible: boolean;
@@ -14,12 +15,23 @@ const PieShape = forwardRef(
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     const [hoveredSection, setHoveredSection] = useState<number | null>(null);
-
-    // Array of emojis to use for each section
-    const emojis = ["😀", "🎉", "🚀", "💡", "🌈", "🎵", "🍕", "🌟"];
+    const [emojis, setEmojis] = useState([
+      "😀",
+      "🎉",
+      "🚀",
+      "💡",
+      "🌈",
+      "🎵",
+      "🍕",
+      "🌟",
+    ]);
 
     const svgSize = 300;
     const halfSize = svgSize / 2;
+
+    const shuffleEmojis = () => {
+      setEmojis([...emojis].sort(() => Math.random() - 0.5));
+    };
 
     return (
       <div
@@ -88,6 +100,21 @@ const PieShape = forwardRef(
               </text>
             </React.Fragment>
           ))}
+
+          {/* Shuffle circle and emoji */}
+          <g onClick={shuffleEmojis} style={{ cursor: "pointer" }}>
+            <circle cx={halfSize} cy={halfSize} r={48} fill="#9746FF" />
+            <text
+              x={halfSize}
+              y={halfSize}
+              fontSize="32"
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="white"
+            >
+              🔀
+            </text>
+          </g>
         </svg>
       </div>
     );
