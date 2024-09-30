@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, forwardRef, ForwardedRef } from "react";
-import { FiShuffle } from "react-icons/fi"; // Import the shuffle icon
 
 interface PieShapeProps {
   isVisible: boolean;

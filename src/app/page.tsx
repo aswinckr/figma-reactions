@@ -62,7 +62,7 @@ export default function Home() {
           />
         </div>
         <p className="text-sm text-gray-500 relative z-10 select-none">
-          Press 'E' to show reactions, click outside to hide
+          Press &apos;E&apos; to show reactions, click outside to hide
         </p>
       </div>
       <AnimatedReactions currentEmoji={selectedEmoji} />{" "}
